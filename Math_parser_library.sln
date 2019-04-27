@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math_parser_library", "Math_parser_library.csproj", "{DC8C8DCD-1482-4EB1-9154-89C79BFACCCC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC8C8DCD-1482-4EB1-9154-89C79BFACCCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC8C8DCD-1482-4EB1-9154-89C79BFACCCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC8C8DCD-1482-4EB1-9154-89C79BFACCCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC8C8DCD-1482-4EB1-9154-89C79BFACCCC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {47082ABA-6603-49AD-BB0C-D46AB613CC3A}
+	EndGlobalSection
+EndGlobal
