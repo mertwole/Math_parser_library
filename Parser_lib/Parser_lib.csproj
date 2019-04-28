@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arrays.cs" />
+    <Compile Include="Array.cs" />
     <Compile Include="ExpressionMember.cs" />
     <Compile Include="Function.cs" />
     <Compile Include="Operand.cs" />

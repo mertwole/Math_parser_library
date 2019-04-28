@@ -24,8 +24,11 @@ namespace Parser_lib
                 return Parser.InExpressionStrings[string_index];
             }
 
-            if (float.TryParse(value, out float val))//number
-                return val;
+            if (int.TryParse(value, out int ival))//int
+                return ival;
+
+            if (float.TryParse(value, out float fval))//float
+                return fval;
 
             return Variables.VariableList[value]; //variable
         }

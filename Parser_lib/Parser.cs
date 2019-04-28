@@ -164,6 +164,9 @@ namespace Parser_lib
 
                             string parameters = InBracketsExpressions[brackets_value];
 
+                            if (parameters == "")
+                                return new_member;
+
                             List<IExpressionMember> parameters_list = new List<IExpressionMember>();
 
                             while(parameters.Contains(','))
@@ -185,7 +188,38 @@ namespace Parser_lib
             }
             else if(expression[expression.Length - 1] == ']')
             {//array
+                string name = expression.Substring(0, expression.IndexOf('['));
 
+                for(int i = 0; i < Array.ArrayList.Count; i++)
+                {
+                    if(Array.ArrayList[i].Name == name)
+                    {
+                        int.TryParse(expression.Substring(expression.IndexOf('[') + 1, expression.Length - expression.IndexOf('[') - 2), out int brackets_value);
+
+                        Array new_member = (Array)Array.ArrayList[i].Clone();
+
+                        string parameters = InBracketsExpressions[brackets_value];
+
+                        if (parameters == "")
+                            return new_member;
+
+                        List<IExpressionMember> parameters_list = new List<IExpressionMember>();
+
+                        while (parameters.Contains(','))
+                        {
+                            parameters_list.Add(BuildExpressionTree(ReplaceBracketsWithIndexes(parameters.Substring(0, parameters.IndexOf(',')))));
+                            parameters = parameters.Remove(0, parameters.IndexOf(',') + 1);
+                        }
+
+                        parameters_list.Add(BuildExpressionTree(ReplaceBracketsWithIndexes(parameters)));
+
+                        new_member.parameters = parameters_list.ToArray();
+
+                        return new_member;
+                    }
+                }
+
+                throw new Exception("FunctionNotSpecified");
             }
 
             return new Operand() { value = expression };
@@ -201,6 +235,15 @@ namespace Parser_lib
                     evaluated_params.Add(SolveExpressionTree(param));
 
                 return (root as Function).Evaluate(evaluated_params.ToArray());
+            }
+            else if(root.GetType() == typeof(Array))
+            {
+                List<int> evaluated_params = new List<int>();
+
+                foreach (var param in (root as Array).parameters)
+                    evaluated_params.Add((int)SolveExpressionTree(param));
+
+                return (root as Array).Evaluate(evaluated_params.ToArray());
             }
             else if(root.GetType() == typeof(Operand))
             {
