@@ -18,7 +18,7 @@ namespace Math_parser_library
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            label1.Text = Parser_lib.Parser.Parse(textBox1.Text).ToString();
         }
     }
 }
