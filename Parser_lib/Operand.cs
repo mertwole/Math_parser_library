@@ -30,7 +30,7 @@ namespace Parser_lib
             if (float.TryParse(value, out float fval))//float
                 return fval;
 
-            return Variables.VariableList[value]; //variable
+            return Variable.VariableList[value]; //variable
         }
     }
 }

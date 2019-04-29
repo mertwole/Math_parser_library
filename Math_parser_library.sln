@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math_parser_library", "Math_parser_library.csproj", "{DC8C8DCD-1482-4EB1-9154-89C79BFACCCC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo.csproj", "{DC8C8DCD-1482-4EB1-9154-89C79BFACCCC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser_lib", "Parser_lib\Parser_lib.csproj", "{DC476885-25D7-4BCA-AD3D-2A384F0F47EA}"
 EndProject

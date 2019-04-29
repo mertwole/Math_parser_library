@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Parser_lib
 {
-    class Array : IExpressionMember, ICloneable
+    internal class Array : IExpressionMember, ICloneable
     {
         internal IExpressionMember[] parameters;
+
+        internal static List<Array> ArrayList = new List<Array>();
 
         internal dynamic Evaluate(int[] parameters)
         {
@@ -29,12 +31,7 @@ namespace Parser_lib
             return new Array() { Name = Name, Data = Data };
         }
 
-        dynamic Data;
+        internal dynamic Data;
         internal string Name;
-
-        internal static List<Array> ArrayList = new List<Array>()
-        {
-            new Array(){ Name = "a", Data = new float[] { 10, 45, 5} }
-        };
     }
 }

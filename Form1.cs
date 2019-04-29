@@ -14,6 +14,13 @@ namespace Math_parser_library
         public Form1()
         {
             InitializeComponent();
+
+            Parser_lib.Parameters.AddVariable("a", 10);
+
+            Parser_lib.Parameters.AddArray("b", new float[] { 10, 0, 9 });
+
+            Parser_lib.Parameters.AddFunction("Get10", new Parser_lib.Parameters.FunctionCode((x) => 10));
+            Parser_lib.Parameters.AddFunction("TripleSumm", new Parser_lib.Parameters.FunctionCode((x) => x[0] + x[1] + x[2]));
         }
 
         private void button1_Click(object sender, EventArgs e)

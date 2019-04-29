@@ -101,12 +101,12 @@ namespace Parser_lib
 
         static List<string> InBracketsExpressions = new List<string>();
 
-        static IExpressionMember BuildExpressionTree(string expression)
+        static IExpressionMember BuildExpressionTree(string expression)//recursive
         {
             IExpressionMember member;
 
             //operators parsing
-            foreach(var oper in Operator.OperatorList)
+            foreach(var oper in Parameters.OperatorList)
             {
                 var oper_pos = oper.Find(expression);
 
@@ -115,6 +115,7 @@ namespace Parser_lib
 
                 member = (Operator)oper.Clone();
 
+                //add operands to operator in dependence of operator type
                 if(oper.GetType() == typeof(Operator.UnarOperator))
                 {
                     (member as Operator).Operands = new IExpressionMember[] 
@@ -130,7 +131,7 @@ namespace Parser_lib
                         BuildExpressionTree(expression.Substring(oper_pos[0].Item2 + 1))
                     };
                 }
-                else if(oper.GetType() == typeof(Operator.TrinarOperator))
+                else if(oper.GetType() == typeof(Operator.TernarOperator))
                 {
                     (member as Operator).Operands = new IExpressionMember[]
                     {
@@ -143,9 +144,9 @@ namespace Parser_lib
                 return member;
             }
 
-            if(expression[expression.Length - 1] == ')')//func or brackets
+            if(expression[expression.Length - 1] == ')')//function or brackets
             {
-                if(expression[0] == '(')
+                if(expression[0] == '(')//function must start with name, else there is brackets
                 {//brackets
                     int.TryParse(expression.Substring(1, expression.Length - 2), out int index);
                     return BuildExpressionTree(InBracketsExpressions[index]);
@@ -200,9 +201,6 @@ namespace Parser_lib
 
                         string parameters = InBracketsExpressions[brackets_value];
 
-                        if (parameters == "")
-                            return new_member;
-
                         List<IExpressionMember> parameters_list = new List<IExpressionMember>();
 
                         while (parameters.Contains(','))
@@ -219,16 +217,19 @@ namespace Parser_lib
                     }
                 }
 
-                throw new Exception("FunctionNotSpecified");
+                throw new Exception("ArrayNotSpecified");
             }
 
             return new Operand() { value = expression };
         }
 
-        static dynamic SolveExpressionTree(IExpressionMember root)
+        static dynamic SolveExpressionTree(IExpressionMember root)//recursive
         {      
             if(root.GetType() == typeof(Function))
             {
+                if((root as Function).parameters == null)//function without parameters
+                    return (root as Function).Evaluate(null);
+
                 List<dynamic> evaluated_params = new List<dynamic>();
 
                 foreach (var param in (root as Function).parameters)
@@ -249,7 +250,7 @@ namespace Parser_lib
             {
                 return (root as Operand).Evaluate();
             }
-            else//if (root.GetType() == typeof(Operator))
+            else//if root type equals operator
             {
                 List<dynamic> evaluated_operands = new List<dynamic>();
 
